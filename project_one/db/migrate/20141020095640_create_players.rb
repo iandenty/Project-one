@@ -3,6 +3,7 @@ class CreatePlayers < ActiveRecord::Migration
     create_table :players do |t|
       t.string :name
       t.text :image
+      t.string :password_digest
 
       t.timestamps
     end

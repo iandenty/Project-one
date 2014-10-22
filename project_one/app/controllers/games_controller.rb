@@ -1,13 +1,41 @@
 class GamesController < ApplicationController
   # GET /games
   # GET /games.json
-  def index
-    @games = Game.all
+  def make_move
+    @game = Game.find params[:id]
+    total_moves = @game.moves.count 
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games }
-    end
+    if @game.your_turn?(current_player.id)
+ 
+      @game.next_move(params[:player_move], current_player.id)
+      current_moves_array = @game.moves.where(player_id: current_player.id).pluck(:player_move)
+      if @game.is_win?(current_moves_array)
+        if @game.moves.first[:player_id] == current_player
+          s = Score.create(game_id: @game.id, player1_win: true)
+          redirect_to @game, notice: "#{Move.last.player.name} is the winner!"
+        else
+          s = Score.create(game_id: @game.id, player2_win: true)
+          redirect_to @game, notice: "#{Move.last.player.name} is the winner!"
+        end
+      elsif @game.is_draw?(total_moves)
+        s = Score.create(game_id: @game.id, draw: true)
+        redirect_to @game, notice: 'draw!'
+      else
+        redirect_to @game
+      end
+    else
+    redirect_to @game, notice: 'Wait your turn'
+    # end
+  end
+  end
+
+    def index
+      @games = Game.all
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @games }
+      end
   end
 
   # GET /games/1
@@ -25,6 +53,7 @@ class GamesController < ApplicationController
   # GET /games/new.json
   def new
     @game = Game.new
+    @game.player1_id = current_player.id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +70,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(params[:game])
-
+    @game.player1_id = current_player.id
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }

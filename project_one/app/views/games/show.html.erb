@@ -2,14 +2,32 @@
 
 <p>
   <b>Player1:</b>
-  <%= @game.player1_id %>
+  <%= Player.find(@game.player1_id).name %>
 </p>
 
 <p>
   <b>Player2:</b>
-  <%= @game.player2_id %>
+  <%= Player.find(@game.player2_id).name %>
 </p>
 
+<table border=1>
+<% (0..8).to_a.each_slice(3) do |slice| %>
+  <tr>
+    <% slice.each do |number|%>
+      <td>
+        <%= form_tag make_move_path do %>
+          <%= hidden_field_tag :player_move, number %>
+        <%# if there is a record for this move , then show x or o whether its the player id 1 or 2 who played the move, else show an empty cell%>
+         <%= cell_submit_tag(@game, number, current_player) %>
+        <% end %>
 
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+
+<!-- , disable_with: "#{@game.player1_id ? "o" : "x" } -->
+<%#= link_to 'Edit', edit_game_path(@game) %><!--  | -->
+<%= link_to 'Quit game', games_path %>

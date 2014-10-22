@@ -31,8 +31,9 @@ ActiveRecord::Schema.define(:version => 20141020100606) do
   create_table "players", :force => true do |t|
     t.string   "name"
     t.text     "image"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "password_digest"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "scores", :force => true do |t|

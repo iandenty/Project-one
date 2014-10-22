@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Player1:</b>
+  <%= Player.find(@game.player1_id).name %>
+</p>
+
+<p>
+  <b>Player2:</b>
+  <%= Player.find(@game.player2_id).name %>
+</p>
+
+<table>
+  <tr>
+    <% (0..2).each do |number| %>
+      <td>
+        <%= form_tag make_move_path do %>
+          <%= hidden_field_tag :player_move, number %>
+          <%= submit_tag(" ") %>
+        <% end %>
+      </td>
+    <% end %>
+    <tr>
+      <% (3..5).each do |number| %>
+        <td>
+          <%= form_tag make_move_path do %>
+            <%= hidden_field_tag :player_move, number %>
+            <%= submit_tag(" ") %>
+          <% end %>
+        </td>
+      <% end %>
+      <tr>
+        <% (6..8).each do |number| %>
+          <td>
+            <%= form_tag make_move_path do %>
+              <%= hidden_field_tag :player_move, number %>
+              <%= submit_tag(" ") %>
+            <% end %>
+          </td>
+        <% end %>
+</table>
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

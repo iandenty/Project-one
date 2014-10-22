@@ -1,25 +1,6 @@
-<h1>Listing players</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Image</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<h1>Players</h1>
 <% @players.each do |player| %>
-  <tr>
-    <td><%= player.name %></td>
-    <td><%= player.image %></td>
-    <td><%= link_to 'Show', player %></td>
-    <td><%= link_to 'Edit', edit_player_path(player) %></td>
-    <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <%= player.name %> 
 <% end %>
-</table>
-
-<br />
 
 <%= link_to 'New Player', new_player_path %>

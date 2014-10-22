@@ -1,8 +1,18 @@
 ProjectOne::Application.routes.draw do
+  # get "sessions/new"
+
+  # get "sessions/create"
+
+  # # get "sessions/destroy"
+  post 'games/:id', to: 'games#make_move', as: :make_move
+  get "log_out", to: "sessions#destroy", as: "log_out"
+  get "log_in", to: "sessions#new", as: "log_in"
+  get "sign_up", to: "players#new", as: "sign_up"
+
   resources :games
-
-
   resources :players
+  resources :sessions
+
 
 
   # The priority is based upon order of creation:
@@ -54,7 +64,7 @@ ProjectOne::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'players#index'
 
   # See how all your routes lay out with "rake routes"
 
