@@ -1,8 +1,9 @@
 class Player < ActiveRecord::Base
-  attr_accessible :image, :name, :password, :password_confirmation
+  attr_accessible :image, :name, :player_image, :remote_player_image_url, :password, :password_confirmation
+  mount_uploader :player_image, PlayerImageUploader
 
   has_secure_password
-  
+
   has_many :games_as_player1, foreign_key: :player1_id, class_name: 'Game'
   has_many :games_as_player2, foreign_key: :player2_id, class_name: 'Game'
   has_many :moves

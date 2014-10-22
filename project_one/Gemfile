@@ -6,6 +6,10 @@ gem 'rails', '3.2.19'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
+gem 'carrierwave', '0.9.0'
+gem 'rmagick', :require => 'RMagick'
 
 group :development do
   gem 'pry-rails'

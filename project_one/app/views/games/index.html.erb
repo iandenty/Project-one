@@ -1,25 +1,30 @@
 <h1>Listing games</h1>
-
 <table>
   <tr>
     <th>Player1</th>
+    <th></th>    
     <th>Player2</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @games.each do |game| %>
   <tr>
-    <td><%= game.player1_id %></td>
-    <td><%= game.player2_id %></td>
-    <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= Player.find(game.player1_id).name %></td>
+    <td>vs</td>
+    <td><%= Player.find(game.player2_id).name %></td>
+    <td><%= link_to 'Go to game!', game %></td>
+<!--     <td><%#= link_to 'Edit', edit_game_path(game) %></td> -->
+    <td><%= link_to 'x', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
+
 <% end %>
 </table>
-
 <br />
 
 <%= link_to 'New Game', new_game_path %>
+
+<%= paginate @games, theme: 'twitter-bootstrap' %>
+
+
+

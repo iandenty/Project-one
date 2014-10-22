@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141020100606) do
+ActiveRecord::Schema.define(:version => 20141022184346) do
 
   create_table "games", :force => true do |t|
     t.integer  "player1_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20141020100606) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.text     "player_image"
   end
 
   create_table "scores", :force => true do |t|

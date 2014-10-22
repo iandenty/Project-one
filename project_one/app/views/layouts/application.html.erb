@@ -17,6 +17,12 @@
       <%= link_to "log in", log_in_path %>
     <% end %>
   </div>
+  <div id="scoreboard">
+    <table>
+<% (0..5).each do |player| %>
+  </table>
+  <% end %>
+  </div>
 
   <% flash.each do |name, msg| %>
     <div class="flash-message flash-message-<%= name %>">
