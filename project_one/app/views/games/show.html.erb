@@ -1,16 +1,29 @@
-<p id="notice"><%= notice %></p>
 
-<p>
+
+<div id = "battle">
+<div id = "player1">
   <b>Player1:</b>
   <%= Player.find(@game.player1_id).name %>
-</p>
+  <% if Player.find(@game.player1_id).player_image.nil? %>
+  <%= image_tag("default.png", class: "avatar") %>
+  <% else %>
+  <%= image_tag(Player.find(@game.player1_id).player_image, class: "avatar") %>
+  <% end %>
+</div>
 
-<p>
+<div id="player2">
   <b>Player2:</b>
   <%= Player.find(@game.player2_id).name %>
-</p>
+  <% if Player.find(@game.player2_id).player_image.nil? %>
+    <%= image_tag("corey.jpg", class: "avatar") %>
+    <%= image_tag('default.png') %>
+  <% else %>
+    <%= image_tag(Player.find(@game.player2_id).player_image, class: "avatar") %>
+  <% end %>
+</div>
+</div>
 
-<table border=1>
+<table>
 <% (0..8).to_a.each_slice(3) do |slice| %>
   <tr>
     <% slice.each do |number|%>

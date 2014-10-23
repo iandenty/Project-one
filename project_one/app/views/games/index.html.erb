@@ -8,6 +8,8 @@
     <th></th>
   </tr>
 
+<%= link_to 'New Game', new_game_path %>
+
 <% @games.each do |game| %>
   <tr>
     <td><%= Player.find(game.player1_id).name %></td>
@@ -21,8 +23,6 @@
 <% end %>
 </table>
 <br />
-
-<%= link_to 'New Game', new_game_path %>
 
 <%= paginate @games, theme: 'twitter-bootstrap' %>
 

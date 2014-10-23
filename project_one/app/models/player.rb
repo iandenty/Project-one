@@ -1,5 +1,6 @@
 class Player < ActiveRecord::Base
   attr_accessible :image, :name, :player_image, :remote_player_image_url, :password, :password_confirmation
+  
   mount_uploader :player_image, PlayerImageUploader
 
   has_secure_password
@@ -27,5 +28,9 @@ class Player < ActiveRecord::Base
   #     self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
   #   end
   # end
+
+  def role?(role_to_compare)
+    self.role.to_s == role_to_compare.to_s
+  end
 
 end

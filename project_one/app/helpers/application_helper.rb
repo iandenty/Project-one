@@ -10,7 +10,6 @@ module ApplicationHelper
     else
       " "
     end
-
     if game.your_turn?(current_player.id) && !move.present?
       submit_tag value
     else

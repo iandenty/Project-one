@@ -12,36 +12,36 @@ class GamesController < ApplicationController
       end
     end
 
-  def make_move
-    @game = Game.find params[:id]
-    total_moves = @game.moves.count
+    def make_move
+      @game = Game.find params[:id]
 
-    
-    
-
-    if @game.your_turn?(current_player.id)
- 
-      @game.next_move(params[:player_move], current_player.id)
-      current_moves_array = @game.moves.where(player_id: current_player.id).pluck(:player_move)
-      if @game.is_win?(current_moves_array)
-        if @game.moves.first[:player_id] == current_player
-          s = Score.create(game_id: @game.id, player1_win: true)
-          redirect_to @game, notice: "#{Move.last.player.name} is the winner!"
+      if @game.your_turn?(current_player.id)
+        @game.next_move(params[:player_move], current_player.id, @game.player2_id)
+        current_moves_array = @game.moves.where(player_id: current_player.id).pluck(:player_move)
+        total_moves = @game.moves.count
+        if @game.is_computer?(@game.player2_id)
+          computer_moves_array = @game.moves.where(player_id: @game.player2_id).pluck(:player_move)
+          if @game.is_win?(computer_moves_array)
+            s = Score.create(game_id: @game.id, player2_win: true)
+            redirect_to @game, notice: "The computer is the winner!" and return
+          end
+          redirect_to @game
+        elsif @game.is_win?(current_moves_array)
+          if @game.moves.first[:player_id] == @game.player1_id
+            s = Score.create(game_id: @game.id, player1_win: true)
+            redirect_to @game, notice: "#{Move.last.player.name} is the winner!"
+          else
+            s = Score.create(game_id: @game.id, player2_win: true)
+            redirect_to @game, notice: "#{Move.last.player.name} is the winner!"
+          end
+        elsif @game.is_draw?(total_moves)
+          s = Score.create(game_id: @game.id, draw: true)
+          redirect_to @game, notice: 'draw!'
         else
-          s = Score.create(game_id: @game.id, player2_win: true)
-          redirect_to @game, notice: "#{Move.last.player.name} is the winner!"
+          redirect_to @game
         end
-      elsif @game.is_draw?(total_moves)
-        s = Score.create(game_id: @game.id, draw: true)
-        redirect_to @game, notice: 'draw!'
-      else
-        redirect_to @game
-      end
-    else
-    redirect_to @game, notice: 'Wait your turn'
-    # end
   end
-  end
+end
 
   # GET /games/1
   # GET /games/1.json
