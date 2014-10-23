@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     # @games = Game.all      
-    @games = Game.order(:created_at).page(params[:page])
+    @games = Game.order('created_at DESC').page(params[:page])
 
 
     respond_to do |format|
@@ -12,11 +12,13 @@ class GamesController < ApplicationController
       end
     end
 
-
-
   def make_move
     @game = Game.find params[:id]
-    total_moves = @game.moves.count 
+    total_moves = @game.moves.count
+
+    
+    
+
     if @game.your_turn?(current_player.id)
  
       @game.next_move(params[:player_move], current_player.id)
