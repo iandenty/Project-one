@@ -12,3 +12,84 @@
  *= require bootstrap
  *= require_tree .
  */
+
+/* rgba(233, 234, 237, 1.0)*/
+
+
+/*.flash-message {
+ font-family: 'Special Elite', cursive;
+ opacity:0.7;
+ white-space:nowrap;
+ overflow:hidden;
+ border-right: 3px solid black;
+ -webkit-animation: typing 2s steps(1, end);
+}*/
+
+header {
+  margin-top: 5%;
+}
+
+footer {
+  margin-top: 5%;
+}
+
+h1 {
+  color: rgba(100, 137, 172, 1.0);
+}
+
+#player_nav {
+  font-family: 'Dosis', sans-serif;
+  margin: 0 auto;
+  width: 80%;
+}
+
+#player_nav a {
+padding-left: 1%;
+padding-right: 1%
+}
+
+.form_container label {
+  font-family: 'Dosis', sans-serif;
+  margin-bottom: 0;
+}
+
+.form_container .field {
+  font-family: 'Dosis', sans-serif;
+  margin-bottom: 0;
+}
+
+.form_container input {
+  font-family: 'Dosis', sans-serif;
+  width: 20%;
+  margin-bottom: 0;
+}
+
+.form_container .action {
+  font-family: 'Dosis', sans-serif;
+  color: rgba(128, 128, 128, 1.0);
+  width: 20%;
+  height: 5%;
+}
+
+.login label {
+  font-family: 'Dosis', sans-serif;
+  margin-bottom: 0;
+}
+
+.login .field {
+  font-family: 'Dosis', sans-serif;
+  margin-bottom: 0;
+}
+
+.login input {
+  font-family: 'Dosis', sans-serif;
+  width: 20%;
+  margin-bottom: 0;
+}
+
+.login .action {
+  font-family: 'Dosis', sans-serif;
+  color: rgba(128, 128, 128, 1.0);
+  width: 20%;
+  height: 5%;
+}

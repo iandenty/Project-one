@@ -5,8 +5,13 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-</head>
+  <link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+  </head>
 <body>
+<header></header>
   <div id="player_nav">
     <% if current_player %>
       Logged in as <%= current_player.name %>.
@@ -17,22 +22,16 @@
       <%= link_to "log in", log_in_path %>
     <% end %>
   </div>
-  <div id="scoreboard">
-    <table>
-<% (0..5).each do |player| %>
-  </table>
-  <% end %>
-  </div>
 
+  <div class="container">
   <% flash.each do |name, msg| %>
-    <div class="flash-message flash-message-<%= name %>">
+    <div class="flash-message flash-message-<%= name %>"><span>&nbsp;</span>
       <%= msg %>
     </div>
   <% end %>
 
-
-
 <%= yield %>
-
+</div>
+<footer></footer>
 </body>
 </html>
