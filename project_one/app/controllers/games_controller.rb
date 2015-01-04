@@ -5,7 +5,6 @@ class GamesController < ApplicationController
     # @games = Game.all      
     @games = Game.order('created_at DESC').page(params[:page])
 
-
     respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @games }
@@ -14,28 +13,21 @@ class GamesController < ApplicationController
 
     def make_move
       @game = Game.find params[:id]
-
-# puts "#{@game.your_turn?(current_player.id)} *************************************"
-# puts "#{@game.is_win?(current_moves_array)} *************************************"
-
       if @game.your_turn?(current_player.id)
         @game.next_move(params[:player_move], current_player.id, @game.player2_id)
         current_moves_array = @game.moves.where(player_id: current_player.id).pluck(:player_move)
         total_moves = @game.moves.count
         if @game.is_computer?(@game.player2_id)
           computer_moves_array = @game.moves.where(player_id: @game.player2_id).pluck(:player_move)
-
           if @game.is_win?(computer_moves_array)
             s = Score.create(game_id: @game.id, player2_win: true)
             redirect_to @game, notice: "The computer is the winner!" and return
           else
-          redirect_to @game
+            redirect_to @game
           end
         elsif @game.is_win?(current_moves_array)
-
           if @game.moves.first[:player_id] == @game.player1_id
             s = Score.create(game_id: @game.id, player1_win: true)
-
             redirect_to @game, notice: "#{Move.last.player.name} is the winner!"
           else
             s = Score.create(game_id: @game.id, player2_win: true)
@@ -47,8 +39,8 @@ class GamesController < ApplicationController
         else
           redirect_to @game
         end
-  end
-end
+      end
+    end
 
   # GET /games/1
   # GET /games/1.json

@@ -22,16 +22,9 @@
       <%= link_to "log in", log_in_path %>
     <% end %>
   </div>
-
   <div class="container">
-  <% flash.each do |name, msg| %>
-    <div class="flash-message flash-message-<%= name %>"><span>&nbsp;</span>
-      <%= msg %>
-    </div>
-  <% end %>
-
-<%= yield %>
-</div>
+    <%= yield %>
+  </div>
 <footer></footer>
 </body>
 </html>
