@@ -1,0 +1,33 @@
+<h1>Listing games</h1>
+
+<%= link_to 'New Game', new_game_path, class: "newgame" %>
+
+<table class = "indextable">
+  <tr>
+    <th></th>
+    <th></th>    
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  
+
+  <% @games.each do |game| %>
+  <tr>
+    <td><%= Player.find(game.player1_id).name %></td>
+    <td>vs</td>
+    <td><%= Player.find(game.player2_id).name %></td>
+    <td><%= link_to 'Go to game!', game, class: "destroy" %></td>
+    <!--     <td><%#= link_to 'Edit', edit_game_path(game) %></td> -->
+    <div class="destroy"><td><%= link_to 'x', game, method: :delete, data: { confirm: 'Are you sure?' } %></td></div>
+  </tr>
+
+  <% end %>
+</table>
+<br />
+
+<%= paginate @games, theme: 'twitter-bootstrap' %>
+
+
+

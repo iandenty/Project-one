@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+<div id = "battle">
+  <div class="playerscontainer">
+    <div id = "player1">
+      <b>Player1:</b>
+      <%= Player.find(@game.player1_id).name %>
+      <% if Player.find(@game.player1_id).player_image.nil? %>
+      <%= image_tag("default.png", class: "avatar") %>
+      <% else %>
+      <%= image_tag(Player.find(@game.player1_id).player_image, class: "avatar") %>
+      <% end %>
+    </div>
+    <div id="player2">
+      <b>Player2:</b>
+      <%= Player.find(@game.player2_id).name %>
+      <% if Player.find(@game.player2_id).player_image.nil? %>
+        <%= image_tag("corey.jpg", class: "avatar") %>
+        <%= image_tag('default.png') %>
+      <% else %>
+        <%= image_tag(Player.find(@game.player2_id).player_image, class: "avatar") %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="board">
+  <table class="gametable">
+  <% (0..8).to_a.each_slice(3) do |slice| %>
+    <tr>
+      <% slice.each do |number|%>
+        <td class="squares">
+          <%= form_tag make_move_path do %>
+            <%= hidden_field_tag :player_move, number %>
+          <%# if there is a record for this move , then show x or o whether its the player id 1 or 2 who played the move, else show an empty cell%>
+           <%= cell_submit_tag(@game, number, current_player) %>
+          <% end %>
+
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  </table>
+</div>
+
+
+<!-- , disable_with: "#{@game.player1_id ? "o" : "x" } -->
+<%#= link_to 'Edit', edit_game_path(@game) %><!--  | -->
+<%= link_to 'Quit game', games_path, class: "quit" %>

@@ -1,0 +1,18 @@
+<h1>Players</h1>
+<%= link_to 'New Player', new_player_path %>
+<div class="playerindex">
+<table id="playertable">
+  <% @players.each do |player| %>
+  <tr>
+    <td>
+      <%= image_tag(player.player_image, class: "indexavatar") %>
+    </td>
+    <td>
+
+  <%= player.name %> 
+<% end %>
+<td>
+<tr>
+<table>
+</div>
+
